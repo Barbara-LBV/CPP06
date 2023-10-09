@@ -1,0 +1,77 @@
+/********************************* CAST EN C **********************************************************\
+
+les doubles et les int ne sont pas encodes de la meme facon, la representation en bit de chacun d'eux donnera un resultat tres different pour le meme nb.
+C'est une convertion
+hiercharchie des type
+ -entier moins precis qu'un double ou un float. UNe convertion dans ce sens est ok.
+
+Mais une convertion d'un float vers un entier ne marche pas, car entier moins precis -> cette convertion fait perdre en precision.
+
+Sur des version plus recentes de c++98, utiliser le flag [wno-convertion].
+
+****convertion identitaire (pointeur)****
+
+-> la valeur de base apres convertion garde les meme bits dans le meme ordre.
+c'est une re-interpreation (effet de cast)
+
+void * ->contient une adresse sur n'importe quel type (int, char, float, double), variable permettant bcp de precicion
+
+par contre si void * contient l'adresse d'un float (type precis), que l'on veut caster en int(type -precis) (demotion)
+->pour signifier qu'elle est volontaire cette demotion, affiche clairement le cast (  [...] = (int *)d; )
+
+/************************************ CAST EN C++ ********************************************************\
+
+UPCAST & DOWNCAST
+
+la classs parent est moins specialisse que les classes filles
+nb : les pointeurs parents/enfants sont compatibles en c++.
+pour les upcast (parent vers enfant), le cast peut etre implicite car on passe de moins precis, a plus precis.
+pour les downcast (child vers parent), le cast doit etre explicite car on passe d'une classe precis, a une classe moins precise.
+NB: les casts entre class filles est hasardeux car autant une class fille est une class parent, autant les classes filles peuvent etre tres differentes entre elles.
+Ca compile mais c'est tres dangereux
+
+STATIC_CAST -> CPP06 ex00
+
+Static cast :
+permet de faire des convertions simple et de naviguer dans l'arbre d'heritage.
+syntaxe -> static_cast<type>(param)   -> on veut convertir le param en le type entre chevrons.
+Peut etre une demotion ou une promotion.
+Meme prob cependant : autorise la compile de cast entre de classes filles d'un meme parent ...
+avantage  de static_cast : il detecte quand on veut faire des cast entre des classes qui ne sont pas liees (pas dans un meme arbre d'heritage).
+
+
+DYNAMIC CAST -> CPP06 ex02
+
+A lieu a l'execution et non a la compilation !!
+Il faut donc implementer son code de telle facon que le prog puisse detecter un bug eventuel du cast a l'execution.
+Ne fonctionne qu'en polyformisme par sous-type -> methode virtual.
+ne fonctionne que sur pointeur ou reference
+syntaxe pointeur =   dynamic_cast<type *>(param);
+
+syntaxe ref =  dynamic_cast<type &>(*param);
+try and catch avec exception std::badcast car la reference ne pas etre NULL, cela permet d'eviter cela. 
+
+
+Reinterpret Cast -> CPP06 ex01
+
+->permet de realiser des re-interpretation en plus des up et down cast.
+le + permissif, le compilateur ne va pas faire de verification, par contre potentiel prob a l'exec.
+ reinterpret_cast<type *>(param)
+tres utiliser pour le re-typage comme lorsqu'on recoit une donnee dont on ne connait pas le type, exemple variable void * pour 
+recevoir une suite d'octet, on s'apercoit qu c'est un char, on peut avec reinterpret_cast retyper le void * en char pour interpreter correctement donnee recue.
+
+CONST CAST
+
+peut transformer les qualifieurs de type(const etc)
+NB : utiliser un const cast est tres mauvais signe, il faut mieux revoir le code.
+les const sont a utiliser le + svt possible pour avoir un code stable.
+
+CAST OPERATORS
+
+operator float ()
+ {return this->_v;}
+operator int()
+ {return static_cast<int>(this->_v);}
+
+std::cout << 
+Utiles pour interpreter des classes type
