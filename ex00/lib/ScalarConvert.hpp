@@ -6,7 +6,7 @@
 /*   By: blefebvr <blefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 18:09:13 by blefebvr          #+#    #+#             */
-/*   Updated: 2023/10/09 17:30:38 by blefebvr         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:54:14 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,41 +35,52 @@ class ScalarConvert
 		ScalarConvert &operator=(ScalarConvert const &s);
 
 		static int	convert(std::string *nb);
-		void		printChar(void);
-		void		printFloat(void);
-		void		printDouble(void);
-		void		printInt(void);
+		char		toChar(void)const;
+		float		toFloat(void)const;
+		double		toDouble(void)const;
+		int			toInt(void)const;
 
 	private:
 		ScalarConvert();
-		int		_selectedType;
-		char	_charScalar;
-		int		_intScalar;
-		float	_floatScalar;
-		double	_doubleScalar;
+		std::string		_input;
+		char			_charScalar;
+		int				_intScalar;
+		float			_floatScalar;
+		double			_doubleScalar;
 
+		/*
+		enum scalarType {charType, intType, floatType, doubleType} _type;
+		       ou
 		static const int noType = -1;
 		static const int charType = 0;
 		static const int intType = 1;
 		static const int floatType = 2;
-		static const int doubleType = 3;
+		static const int doubleType = 3;*/
 	
 	public:
-		class Truc: public std::exception
+		class InvalidInput: public std::exception
 		{
 		public:
 			virtual const char* what() const throw()
 			{
-				return (MAGENTA ".........." DEFAULT);
+				return (MAGENTA "Invalid Input" DEFAULT);
 			}
 		};
 
-		class Bitin: public std::exception
+		class ImpossibleConvert: public std::exception
 		{
 		public:
 			virtual const char* what() const throw()
 			{
-				return (MAGENTA ".........."  DEFAULT);
+				return (MAGENTA "Input Impossible to Convert"  DEFAULT);
+			}
+		};
+		class NonDisplayable: public std::exception
+		{
+		public:
+			virtual const char* what() const throw()
+			{
+				return (MAGENTA "Input Non Displayable"  DEFAULT);
 			}
 		};
 };

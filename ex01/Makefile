@@ -19,7 +19,7 @@ OBJS		= $(addprefix $(OBJS_DIR), $(OBJS_NAME))
 DEPS		= $(addprefix $(OBJS_DIR), $(SRCS_NAME:%.cpp=%.d))
 
 # Headers list
-HEADER_DIR	:=	/lib/
+HEADER_DIR	:=	lib/
 
 HEADER		:=	-I.$(HEADER_DIR)
 
