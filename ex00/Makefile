@@ -5,11 +5,9 @@ NAME	= convert
 
 # Source files list
 SRCS_DIR 	= src/
-
 SRCS_NAME 	= ScalarConvert.cpp \
 			main.cpp
-
-SRCS		=	$(wildcard $(SRCS_DIR)*.cpp)
+SRCS		= $(wildcard $(SRCS_DIR)*.cpp)
 
 OBJS_DIR	= objs/
 OBJS_NAME	= $(patsubst %.cpp, %.o, $(SRCS_NAME))
@@ -19,7 +17,6 @@ DEPS		= $(addprefix $(OBJS_DIR), $(SRCS_NAME:%.cpp=%.d))
 
 # Headers list
 HEADER_DIR	:=	/lib/
-
 HEADER		:=	-I.$(HEADER_DIR)
 
 COLOR		= \e[1;36m

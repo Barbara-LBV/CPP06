@@ -6,7 +6,7 @@
 /*   By: blefebvr <blefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 18:09:13 by blefebvr          #+#    #+#             */
-/*   Updated: 2023/10/09 17:54:14 by blefebvr         ###   ########.fr       */
+/*   Updated: 2023/10/13 18:01:29 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <iostream>
 #include <string>
 # include <stdexcept>
+# include <cstdlib>
 
 # define DEFAULT "\001\033[0;39m\002"
 # define RED "\001\033[1;91m\002"
@@ -28,45 +29,26 @@
 class ScalarConvert
 {
 	public:
-		ScalarConvert(std::string *nb);
-		ScalarConvert(ScalarConvert const &s);
 		~ScalarConvert();
-
-		ScalarConvert &operator=(ScalarConvert const &s);
-
-		static int	convert(std::string *nb);
-		char		toChar(void)const;
-		float		toFloat(void)const;
-		double		toDouble(void)const;
-		int			toInt(void)const;
+		static void		convert(std::string nb);
+		static void		printData(int option, std::string nb);
+		static int		findType(std::string nb);
+		//static void		specLit(std::string nb);
+		//static void		fromChar(std::string nb);
+		//static void		fromInt(std::string nb);
+		//static void		fromDouble(std::string nb);
+		//static void		fromFloat(std::string nb);
+		static std::string		_toChar;
+		static int		_toInt;
+		static double	_toDouble;
+		static float	_toFloat;
 
 	private:
 		ScalarConvert();
-		std::string		_input;
-		char			_charScalar;
-		int				_intScalar;
-		float			_floatScalar;
-		double			_doubleScalar;
-
-		/*
-		enum scalarType {charType, intType, floatType, doubleType} _type;
-		       ou
-		static const int noType = -1;
-		static const int charType = 0;
-		static const int intType = 1;
-		static const int floatType = 2;
-		static const int doubleType = 3;*/
+		ScalarConvert(ScalarConvert const &s);
+		ScalarConvert &operator=(ScalarConvert const &s);
 	
 	public:
-		class InvalidInput: public std::exception
-		{
-		public:
-			virtual const char* what() const throw()
-			{
-				return (MAGENTA "Invalid Input" DEFAULT);
-			}
-		};
-
 		class ImpossibleConvert: public std::exception
 		{
 		public:
@@ -75,15 +57,9 @@ class ScalarConvert
 				return (MAGENTA "Input Impossible to Convert"  DEFAULT);
 			}
 		};
-		class NonDisplayable: public std::exception
-		{
-		public:
-			virtual const char* what() const throw()
-			{
-				return (MAGENTA "Input Non Displayable"  DEFAULT);
-			}
-		};
 };
+
+//std::ostream &operator<<(std::ostream &c, const ScalarConvert &s);
 
 #endif
 
