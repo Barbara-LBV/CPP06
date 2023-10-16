@@ -6,7 +6,14 @@
 /*   By: blefebvr <blefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 17:41:27 by blefebvr          #+#    #+#             */
-/*   Updated: 2023/10/09 17:41:28 by blefebvr         ###   ########.fr       */
+/*   Updated: 2023/10/16 17:43:46 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../lib/Base.hpp"
+
+Base::~Base()
+{
+	std::cout << RED "Base destructor -> called" DEFAULT << std::endl;
+}
 

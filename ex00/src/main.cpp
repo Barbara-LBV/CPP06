@@ -6,7 +6,7 @@
 /*   By: blefebvr <blefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:24:49 by blefebvr          #+#    #+#             */
-/*   Updated: 2023/10/13 18:51:09 by blefebvr         ###   ########.fr       */
+/*   Updated: 2023/10/16 10:55:27 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,3 @@ int main(int ac, char **av)
 		std::cerr << "Usage: ./convert <value>" << std::endl;
 	return (0);
 }
-
-//int main() 
-//{
-//    int myInt;
-//    double myDouble;
-//    float myFloat;
-//    const char* myString = "42.2f";
-
-//    myInt = atoi(myString);
-//    myDouble = std::stod(myString);
-//    myFloat = std::stof(myString);
-//    std::cout << "myInt: " << myInt << std::endl;
-//    std::cout << "myDouble: " << myDouble << std::endl;
-//    std::cout << "myFloat: " << myFloat << "f" << std::endl;
-
-//    return 0;
-//}

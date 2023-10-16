@@ -6,14 +6,16 @@
 /*   By: blefebvr <blefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 18:14:27 by blefebvr          #+#    #+#             */
-/*   Updated: 2023/10/13 18:57:12 by blefebvr         ###   ########.fr       */
+/*   Updated: 2023/10/16 11:03:46 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/ScalarConvert.hpp"
 
 ScalarConvert::ScalarConvert()
-{}
+{
+	std::cout << "Default constructor -> called" << std::endl;
+}
 
 ScalarConvert::ScalarConvert(ScalarConvert const &s)
 {
@@ -70,30 +72,46 @@ void 	ScalarConvert::printData(int option, std::string nb)
 	}
 }
 
-//void	ScalarConvert::specLit(std::string nb)
-//{
-	
-//}
+void	ScalarConvert::fromChar(std::string nb)
+{
+	_toChar = nb[0];
+	_toInt = static_cast<int>(_toChar[0]);
+	_toDouble = static_cast<double>(_toInt);
+	_toFloat = static_cast<float>(_toDouble);
+}
 
-//void	ScalarConvert::fromChar(std::string nb)
-//{
-	
-//}
+void	ScalarConvert::fromInt(std::string nb)
+{
+	_toInt = atoi(nb.c_str());
+	_toDouble = static_cast<double>(_toInt) + 0.0;
+	_toFloat = static_cast<float>(_toInt);
+	if (_toInt >= 32 && _toInt <= 126)
+		_toChar = static_cast<char>(_toInt);
+	else
+		_toChar = "Non displayable";
+}
 
-//void	ScalarConvert::fromInt(std::string nb)
-//{
-	
-//}
+void	ScalarConvert::fromDouble(std::string nb)
+{
+	_toDouble = strtod(nb.c_str(), NULL);
+	_toFloat = static_cast<float>(_toDouble);
+	_toInt = static_cast<int>(_toDouble);
+	if (_toDouble >= 32 && _toDouble <= 126)
+		_toChar = static_cast<char>(_toFloat);
+	else
+		_toChar = "Non displayable";
+}
 
-//void	ScalarConvert::fromDouble(std::string nb)
-//{
-	
-//}
-
-//void	ScalarConvert::fromFloat(std::string nb)
-//{
-	
-//}
+void	ScalarConvert::fromFloat(std::string nb)
+{
+	_toFloat = strtod(nb.c_str(), NULL);
+		_toDouble = static_cast<double>(_toFloat);
+		_toInt = static_cast<int>(_toFloat);
+		if (_toFloat >= 32 && _toFloat <= 126)
+			_toChar = static_cast<char>(_toFloat);
+		else if (nb != "nan" || nb != "nanf" || nb != "inf" || nb != "inff" || nb != "-inff" || nb != "-inf")
+			_toChar = "Non displayable";
+}
 
 int		ScalarConvert::findType(std::string nb)
 {
@@ -105,45 +123,24 @@ int		ScalarConvert::findType(std::string nb)
 		return (7);
 	if (nb.size() == 1 && isprint(nb[0]) && !isdigit(nb[0]))
 	{
-		_toChar = nb[0];
-		_toInt = static_cast<int>(_toChar[0]);
-		_toDouble = static_cast<double>(_toInt);
-		_toFloat = static_cast<float>(_toDouble);
+		ScalarConvert::fromChar(nb);
 		return (1);
 	}
 	if (nb[nb.length() - 1] == 'f')
 	{
-		_toFloat = strtod(nb.c_str(), NULL);
-		_toDouble = static_cast<double>(_toFloat);
-		_toInt = static_cast<int>(_toFloat);
-		if (_toFloat >= 32 && _toFloat <= 126)
-			_toChar = static_cast<char>(_toFloat);
-		else if (nb != "nan" || nb != "nanf" || nb != "inf" || nb != "inff" || nb != "-inff" || nb != "-inf")
-			_toChar = "Non displayable";
+		ScalarConvert::fromFloat(nb);
 		return (4);
 	}
 	for (size_t i = 0; i < nb.size(); i++)
 	{
 		if (nb[i] == '.')
 		{
-			_toDouble = strtod(nb.c_str(), NULL);
-			_toFloat = static_cast<float>(_toDouble);
-			_toInt = static_cast<int>(_toDouble);
-			if (_toDouble >= 32 && _toDouble <= 126)
-				_toChar = static_cast<char>(_toFloat);
-			else
-				_toChar = "Non displayable";
+			ScalarConvert::fromDouble(nb);
 			return (3);
 		}
 	}
 	{
-		_toInt = atoi(nb.c_str());
-		_toDouble = static_cast<double>(_toInt) + 0.0;
-		_toFloat = static_cast<float>(_toInt);
-		if (_toInt >= 32 && _toInt <= 126)
-			_toChar = static_cast<char>(_toInt);
-		else
-			_toChar = "Non displayable";
+		ScalarConvert::fromInt(nb);
 		return (2);
 	}
 	return (0);
@@ -165,23 +162,18 @@ void	ScalarConvert::convert(std::string nb)
 	switch(i)
 	{
 		case 0:
-			//ScalarConvert::specLit(nb);
 			ScalarConvert::printData(i, nb);
 			break ;
 		case 1:
-			//ScalarConvert::fromChar(nb);
 			ScalarConvert::printData(i, nb);
 			break ;
 		case 2:
-			//ScalarConvert::fromInt(nb);
 			ScalarConvert::printData(i, nb);
 			break ;
 		case 3:
-			//ScalarConvert::fromDouble(nb);
 			ScalarConvert::printData(i, nb);
 			break ;
 		case 4:
-			//ScalarConvert::fromFloat(nb);
 			ScalarConvert::printData(i, nb);
 			break ;
 		default:
@@ -189,81 +181,3 @@ void	ScalarConvert::convert(std::string nb)
 			break ;
 	}
 }
-	
-	//if (option[i] == 1)
-	//{
-	//	_toChar = nb[0];
-	//	_toInt = static_cast<int>(_toChar);
-	//	_toDouble = static_cast<double>(_toInt);
-	//	_toFloat = static_cast<float>(_toDouble);
-	//	return ;
-	//}
-	//for (int i= 0; i < 4; i++)
-	//{
-		
-	//}
-	//if (nb.c_str() > "~" && nb != toChar)
-	//	toChar = "Non Displayable";
-	//if (nb.size() == 1 && isprint(nb[0]) && !isdigit(nb[0]))
-	//{
-	//	toChar = nb[0];
-	//	toInt = static_cast<int>(toChar[0]);
-	//	toDouble = static_cast<double>(toInt);
-	//	toFloat = static_cast<float>(toDouble);
-	//	return ;
-	//}
-	//if (nb.size() != 1 && isprint(nb[0]) && !isdigit(nb[0]))
-	//{
-	//	toChar = "impossible";
-	//	//toInt = static_cast<char>(toChar[0]);
-	//	//toDouble = static_cast<double>(toInt);
-	//	//toFloat = static_cast<float>(toDouble);
-	//	return ;
-	//}
-	//toInt = std::atoi(nb.c_str());
-	
-	//if (toInt > 126 || toInt < 32)
-	//{
-	//	toChar = "Non displayable";
-	//	toDouble = static_cast<double>(toInt);
-	//	toFloat = static_cast<float>(toDouble);
-	//	return ;
-	//}
-
-	//if (toInt <= 126 && toInt >= 32)
-	//{
-	//	toChar = static_cast<char>(toInt);
-	//	toDouble = static_cast<double>(toInt);
-	//	toFloat = static_cast<float>(toDouble);
-	//	return ;
-	//}
-	
-	//if (nb[nb.size()-1] == 'f')
-	//{
-	//	toFloat = toInt + 0.0;
-	//	toChar = static_cast<char>(toInt);
-	//	toDouble = static_cast<double>(toInt);
-	//	toFloat = static_cast<float>(toDouble);
-	//}
-	//if (nb[nb.size()-1] == 'f')
-	//{
-	//	toInt = stoi(nb);
-	//	toChar = static_cast<char>(toInt);
-	//	toDouble = static_cast<double>(toInt);
-	//	toFloat = static_cast<float>(toDouble);
-	//}
-
-
-	
-		/*std::string		_input;
-		char			_charScalar;
-		int				_intScalar;
-		float			_floatScalar;
-		double			_doubleScalar;
-		enum scalarType {charType, intType, floatType, doubleType} _type;
-		       ou
-		static const int noType = -1;
-		static const int charType = 0;
-		static const int intType = 1;
-		static const int floatType = 2;
-		static const int doubleType = 3;*/
