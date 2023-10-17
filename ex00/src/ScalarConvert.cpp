@@ -6,7 +6,7 @@
 /*   By: blefebvr <blefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 18:14:27 by blefebvr          #+#    #+#             */
-/*   Updated: 2023/10/17 13:39:07 by blefebvr         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:47:25 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,16 +117,25 @@ void	ScalarConvert::fromFloat(std::string nb)
 
 int		ScalarConvert::findType(std::string nb)
 {
-	if (isprint(nb[1]) && !isdigit(nb[1]))
-		return (5);
-	if (!isdigit(nb[nb.length()-1]) && nb[nb.length()-1] != 'f')
-		return (6);
-	if (!isdigit(nb[nb.length()- 2]) && nb[nb.length()-1] == 'f')
-		return (7);
 	if (nb.size() == 1 && isprint(nb[0]) && !isdigit(nb[0]))
 	{
 		ScalarConvert::fromChar(nb);
 		return (1);
+	}
+	if (nb.size() > 1)
+	{
+		int flag = 0;
+		for (size_t i = 0; i < nb.size()-1 ; i++)
+		{
+			if (nb[i] == '.')
+				flag++;
+			if (!isdigit(nb[i]) && nb[i] != '.')
+				return (5);
+		}
+		if (nb[nb.size()-1] != 'f')
+			return (6);
+		if (flag > 1)
+			return (7);
 	}
 	if (nb[nb.length() - 1] == 'f')
 	{
@@ -141,11 +150,8 @@ int		ScalarConvert::findType(std::string nb)
 			return (3);
 		}
 	}
-	{
-		ScalarConvert::fromInt(nb);
-		return (2);
-	}
-	return (0);
+	ScalarConvert::fromInt(nb);
+	return (2);
 }
 
 void	ScalarConvert::convert(std::string nb)

@@ -6,7 +6,7 @@
 /*   By: blefebvr <blefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 17:41:32 by blefebvr          #+#    #+#             */
-/*   Updated: 2023/10/16 19:10:17 by blefebvr         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:52:08 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,16 @@ void 	identify(Base *p)
 		
 		if (a)
 			std::cout << *a << std::endl;
-		else if (b)
+		else 
+			std::cout << "The conversion to A failed." << std::endl;
+		if (b)
 			std::cout << *b << std::endl;
-		else if (c)
+		else 
+			std::cout << "The conversion to B failed." << std::endl;
+		if (c)
 			std::cout << *c << std::endl;
 		else
-		{
-			std::cout << "The conversion failed." << std::endl;
-			return ;
-		}
+			std::cout << "The conversion to C failed." << std::endl;
 	}
 }
 
@@ -71,7 +72,7 @@ void 	identify(Base &p)
 		A &a = dynamic_cast<A &>(p);
 		std::cout << a << std::endl;
 	}
-	catch(const std::bad_cast &e)
+	catch(std::exception &e)
 	{
 		std::cerr << e.what() << '\n';
 	}
@@ -80,7 +81,7 @@ void 	identify(Base &p)
 		B &b = dynamic_cast<B &>(p);
 		std::cout << b << std::endl;
 	}
-	catch(const std::bad_cast &e)
+	catch(std::exception &e)
 	{
 		std::cerr << e.what() << '\n';
 	}
@@ -89,7 +90,7 @@ void 	identify(Base &p)
 		C &c = dynamic_cast<C &>(p);
 		std::cout << c << std::endl;
 	}
-	catch(const std::bad_cast &e)
+	catch(std::exception &e)
 	{
 		std::cerr << e.what() << '\n';
 	}

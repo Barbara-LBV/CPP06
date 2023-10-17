@@ -6,12 +6,14 @@
 /*   By: blefebvr <blefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 17:41:06 by blefebvr          #+#    #+#             */
-/*   Updated: 2023/10/17 13:26:35 by blefebvr         ###   ########.fr       */
+/*   Updated: 2023/10/17 15:32:52 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DATA_HPP
 #define DATA_HPP	
+
+#include <string>
 
 struct Data
 {

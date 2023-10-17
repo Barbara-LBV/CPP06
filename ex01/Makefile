@@ -6,8 +6,7 @@ NAME	= a.out
 # Source files list
 SRCS_DIR 	= src/
 
-SRCS_NAME 	= Data.cpp \
-			Serializer.cpp \
+SRCS_NAME 	= Serializer.cpp \
 			main.cpp
 
 SRCS		=	$(wildcard $(SRCS_DIR)*.cpp)

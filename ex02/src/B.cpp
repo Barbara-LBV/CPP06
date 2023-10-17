@@ -6,7 +6,7 @@
 /*   By: blefebvr <blefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 17:41:25 by blefebvr          #+#    #+#             */
-/*   Updated: 2023/10/16 18:41:17 by blefebvr         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:52:56 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 B::B() : Base()
 {
 	std::cout << YELLOW  "B constructor -> called" DEFAULT << std::endl;
-	_bType = "Je suis B";
+	_bType = "I'm B class.";
 }
 
 B::~B()

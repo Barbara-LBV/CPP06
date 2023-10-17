@@ -6,7 +6,7 @@
 /*   By: blefebvr <blefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 17:41:30 by blefebvr          #+#    #+#             */
-/*   Updated: 2023/10/16 18:42:30 by blefebvr         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:53:08 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 C::C() : Base()
 {
 	std::cout << YELLOW  "C constructor -> called" DEFAULT << std::endl;
-	_cType = "Je suis C";
+	_cType = "I'm C class.";
 }
 
 C::~C()

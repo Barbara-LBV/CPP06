@@ -6,7 +6,7 @@
 /*   By: blefebvr <blefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 17:41:22 by blefebvr          #+#    #+#             */
-/*   Updated: 2023/10/16 18:40:55 by blefebvr         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:52:40 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 A::A() : Base()
 {
 	std::cout << YELLOW  "A constructor -> called" DEFAULT << std::endl;
-	_aType = "Je suis A";
+	_aType = "I am A class.";
 }
 
 A::~A()

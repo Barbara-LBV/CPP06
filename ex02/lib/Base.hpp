@@ -6,7 +6,7 @@
 /*   By: blefebvr <blefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 17:41:15 by blefebvr          #+#    #+#             */
-/*   Updated: 2023/10/17 13:29:19 by blefebvr         ###   ########.fr       */
+/*   Updated: 2023/10/17 15:34:21 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 #include <iostream>
 #include <string>
-#include <typeinfo>
 #include <cstdlib>
 #include <ctime>
 
@@ -37,6 +36,7 @@ void 	identify(Base* p);
 #endif
 
 /*
+
 DYNAMIC CAST
 
 A lieu a l'execution et non a la compilation !!
@@ -47,4 +47,5 @@ syntaxe pointeur = dynamic_cast<type *>(param);
 
 syntaxe ref = dynamic_cast<type &>(*param);
 try and catch avec exception std::badcast car la reference ne pas etre NULL, cela permet d'eviter cela. 
+
 */
