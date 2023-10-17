@@ -6,7 +6,7 @@
 /*   By: blefebvr <blefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 18:14:27 by blefebvr          #+#    #+#             */
-/*   Updated: 2023/10/16 11:03:46 by blefebvr         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:39:07 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	ScalarConvert::fromDouble(std::string nb)
 	_toDouble = strtod(nb.c_str(), NULL);
 	_toFloat = static_cast<float>(_toDouble);
 	_toInt = static_cast<int>(_toDouble);
+	_toInt = roundf(_toFloat);
 	if (_toDouble >= 32 && _toDouble <= 126)
 		_toChar = static_cast<char>(_toFloat);
 	else
@@ -107,6 +108,7 @@ void	ScalarConvert::fromFloat(std::string nb)
 	_toFloat = strtod(nb.c_str(), NULL);
 		_toDouble = static_cast<double>(_toFloat);
 		_toInt = static_cast<int>(_toFloat);
+		_toInt = roundf(_toFloat);
 		if (_toFloat >= 32 && _toFloat <= 126)
 			_toChar = static_cast<char>(_toFloat);
 		else if (nb != "nan" || nb != "nanf" || nb != "inf" || nb != "inff" || nb != "-inff" || nb != "-inf")
